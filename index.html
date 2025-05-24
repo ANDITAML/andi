@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Curriculum Vitae</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+  body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: #f9fafb;
+    color: #333;
+  }
+  header {
+    background: #3f51b5;
+    color: white;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+  }
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .profile img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+  }
+  .profile-info {
+    line-height: 1.1;
+  }
+  .profile-info h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+  .profile-info p {
+    margin: 2px 0 0;
+    font-weight: 300;
+    font-size: 0.9rem;
+    opacity: 0.85;
+  }
+  .menu-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 0;
+  }
+  .menu-button span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .menu-button.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .menu-button.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-button.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+  nav {
+    background: #303f9f;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    width: 250px;
+    height: calc(100% - 64px);
+    padding-top: 1rem;
+    box-shadow: 2px 0 5px rgb(0 0 0 / 0.2);
+    transform: translateX(-260px);
+    transition: transform 0.3s ease;
+    z-index: 999;
+  }
+  nav.open {
+    transform: translateX(0);
+  }
+  nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  nav li {
+    margin: 0;
+  }
+  nav a {
+    display: block;
+    padding: 1rem 1.5rem;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    border-left: 4px solid transparent;
+    transition: background 0.3s ease, border-left-color 0.3s ease;
+  }
+  nav a:hover, nav a.active {
+    background: #3f51b5;
+    border-left-color: #ffab40;
+  }
+  main {
+    max-width: 800px;
+    margin: 2rem auto 4rem;
+    padding: 0 1rem;
+  }
+  section {
+    margin-bottom: 3rem;
+  }
+  section h2 {
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    border-bottom: 3px solid #3f51b5;
+    padding-bottom: 0.25rem;
+  }
+  .about p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 600px;
+  }
+  .experience-item, .education-item {
+    margin-bottom: 1.25rem;
+  }
+  .experience-item h3, .education-item h3 {
+    margin: 0 0 0.25rem;
+    font-weight: 600;
+  }
+  .experience-item span, .education-item span {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #666;
+  }
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .skill {
+    background: #3f51b5;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+  .contact-list {
+    list-style: none;
+    padding: 0;
+  }
+  .contact-list li {
+    margin-bottom: 0.6rem;
+    font-size: 1.05rem;
+  }
+  .contact-list a {
+    color: #3f51b5;
+    text-decoration: none;
+  }
+  .contact-list a:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 600px) {
+    nav {
+      width: 200px;
+      top: 56px;
+      height: calc(100% - 56px);
+      padding-top: 0.75rem;
+    }
+    main {
+      margin: 1.5rem auto 3rem;
+      padding: 0 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="profile">
+    <img src="dita.jpg" alt="Foto Profil" />
+    <div class="profile-info">
+      <h1>Andita Aditia</h1>
+    </div>
+  </div>
+  <button aria-label="Menu" class="menu-button" id="menuButton">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<nav id="sidebar">
+  <ul>
+    <li><a href="#about" class="active">Tentang Saya</a></li>
+    <li><a href="#experience">Pengalaman</a></li>
+    <li><a href="#education">Pendidikan</a></li>
+    <li><a href="#skills">Keahlian</a></li>
+    <li><a href="#contact">Kontak</a></li>
+  </ul>
+</nav>
+
+<main>
+  <section id="about" class="about">
+    <h2>Tentang data diri saya</h2>
+    <p>
+    IT Support, PPIC
+    <div class="row">
+              <div class="col-lg-6">
+                <ul>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Ulang Tahun:</strong> <span>25 Maret 2005</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>https://github.com/ANDITAML?tab=repositories</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Telepon:</strong> <span>+62 888 0909 9789</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Kota:</strong> <span>Karawang</span></li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <ul>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Umur:</strong> <span>20</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Pendidikan Terakir:</strong> <span>S1 Teknik Informatika</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>Ditasal0@gmail.com</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>Joki</span></li>
+                </ul>
+              </div>
+            </div>
+    </p>
+    <p class="py-3">
+              Motivasi saya adalah belajar lebih banyak lagi dengan kita mengetahui banyak ilmu kita dapat mengembangkan diri lagi jauh lebih baik .
+            </p>
+  </section>
+
+  <!-- Resume Section -->
+    <section id="resume" class="resume section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Resume</h2>
+        <p>Berikut beberapa pengalaman yang saya miliki saat ini</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="resume-title">Saya</h3>
+
+            <div class="resume-item pb-0">
+              <h4>Andita Aditia</h4>
+              <p><em>Saya memiliki tingkat belajar yang cepat memahami sesuatu hal yang baru,kebiasaan 
+                saya yang membuat saya ingin terus bergerak maju untuk menghasilkan lebih bagi diri dan orang lain</em></p>
+              <ul>
+                <li>Tangerang</li>
+                <li>+62 888 0909 9789</li>
+                <li>Ditasal0@gmail.com</li>
+              </ul>
+            </div><!-- Edn Resume Item -->
+
+            <h3 class="resume-title">Pendidikan</h3>
+            <div class="resume-item">
+              <h4>Sarjana &amp; Teknik Informatika</h4>
+              <h5>2023-2027</h5>
+              <p><em>Universitas Esa Unggul</em></p>
+              <p>Membuat project Aplikasi game , Web industri ataupun tentang data diri 
+                dan mempelajari banyak hal seperti Database,FlowChart,github dll</p>
+            </div><!-- Edn Resume Item -->
+
+            <div class="resume-item">
+              <h4>SMK &amp; Teknik Komputer dan Jaringan</h4>
+              <h5>2020-2023</h5>
+              <p><em>AL Istikomah</em></p>
+              <p>Banyak mempelajari tentang topologi jaringan dalam suatu tempat
+                mempelajari tentang semua yang berkaitan tentang jaringan, Mengikuti lomba antar Kabupaten </p>
+            </div><!-- Edn Resume Item -->
+
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="resume-title">Pengalaman Bekerja</h3>
+            <div class="resume-item">
+              <h4>Admin PPIC</h4>
+              <h5>2025 - Sekarang</h5>
+              <p><em>PD limbah Putra lestari</em></p>
+              <ul>
+                <li>Mengecek barang yang tersedia di gudang untuk memastikan ketersediaan stok</li>
+                <li>Memantau bahan baku untuk memastikan ketersediaan dan menghindari kekurangan stok.</li>
+                <li>Mengatur pengiriman barang untuk memastikan barang tidak menumpuk lama di gudang. </li>
+                <li>Mengoptimalkan manajemen inventori untuk meningkatkan efisiensi dan mengurangi biaya.</li>
+              </ul>
+            </div><!-- Edn Resume Item -->
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Resume Section -->
+
+
+  <section id="skills">
+    <h2>Keahlian</h2>
+    <div class="skills-list">
+      <span class="skill">HTML</span>
+      <span class="skill">CSS</span>
+      <span class="skill">JavaScript</span>
+      <span class="skill">React</span>
+      <span class="skill">Vue.js</span>
+      <span class="skill">Figma</span>
+      <span class="skill">Git</span>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Kontak</h2>
+    <ul class="contact-list">
+      <li>Email: <a href=>"DitaSal@gmail.com"</a></li>
+      <li>Telepon: <a href=>+62 888 0909 9789</a></li>
+      <li>GitHub: <a href= "_blank" rel="noopener">https://github.com/ANDITAML?tab=repositories</a></li>
+    </ul>
+  </section>
+</main>
+
+<script>
+  const menuButton = document.getElementById('menuButton');
+  const sidebar = document.getElementById('sidebar');
+  const navLinks = sidebar.querySelectorAll('a');
+
+  menuButton.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    menuButton.classList.toggle('open');
+  });
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      menuButton.classList.remove('open');
+      navLinks.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
+
